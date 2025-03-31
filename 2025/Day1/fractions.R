@@ -37,6 +37,16 @@ novels_data <- novels |>
 
 shorts_data <- shorts |>
   mutate(
+    series = case_when(
+      if_any(
+        starts_with("collection"),
+        \(x) str_detect(x, "Miss Marple's Final Cases")
+      ) ~
+        "Miss Marple",
+      if_any(starts_with("collection"), \(x) str_detect(x, "Thirteen")) ~
+        "Miss Marple",
+      TRUE ~ series
+    ),
     series = replace_na(series, "Not part of a series")
   ) |>
   summarize_series()
