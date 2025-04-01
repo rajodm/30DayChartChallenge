@@ -141,22 +141,9 @@ colors <- c(
 
 # Fonts ------------------------------------------------------------------
 
-# font_add_google("Libre Baskerville", "libreB")
-font_add(
-  "libreB",
-  regular = "fonts/LibreBaskerville-Regular.ttf",
-  bold = "fonts/LibreBaskerville-Bold.ttf"
-)
+font_add_google("Libre Baskerville", "libreB")
 
-
-# font_add_google("Merriweather", "merriW")
-
-font_add(
-  "merriW",
-  regular = "fonts/Merriweather-Regular.ttf",
-  bold = "fonts/Merriweather-Bold.ttf"
-)
-
+font_add_google("Merriweather", "merriW")
 
 font_add(
   "fa6-brands",
