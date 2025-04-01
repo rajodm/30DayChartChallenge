@@ -15,6 +15,11 @@ novels <- read_csv(here::here("2025/data/agatha_novels.csv")) |>
 shorts <- read_csv(here::here("2025/data/agatha_short_stories.csv")) |>
   clean_agatha_cols()
 
+collections <- read_csv(here::here(
+  "2025/data/agatha_short_story_collections.csv"
+)) |>
+  clean_agatha_cols()
+
 # Just to avoid duplication
 summarize_series <- function(df) {
   df |>
@@ -32,21 +37,47 @@ summarize_series <- function(df) {
     )
 }
 
+# Validating series using short collection
+validated_collections <- collections |>
+  # Filter collections with about only one series
+  # Remove series with values like Hercule Poirot (2)...
+  filter(str_detect(series, "\\(", negate = TRUE)) |>
+  select(name, series)
+
+shorts <- shorts |>
+  left_join(
+    validated_collections,
+    by = c("collection" = "name"),
+    suffix = c("", "_coll1")
+  ) |>
+  left_join(
+    validated_collections,
+    by = c("collection_2" = "name"),
+    suffix = c("", "_coll2")
+  ) |>
+  left_join(
+    validated_collections,
+    by = c("collection_3" = "name"),
+    suffix = c("", "_coll3")
+  )
+
+shorts <- shorts |>
+  mutate(
+    series = coalesce(
+      series,
+      series_coll1,
+      series_coll2,
+      series_coll3
+    )
+  ) |>
+  select(!matches("coll[0-9]$"))
+
+
 novels_data <- novels |>
   summarize_series()
 
 shorts_data <- shorts |>
   mutate(
-    series = case_when(
-      if_any(
-        starts_with("collection"),
-        \(x) str_detect(x, "Miss Marple's Final Cases")
-      ) ~
-        "Miss Marple",
-      if_any(starts_with("collection"), \(x) str_detect(x, "Thirteen")) ~
-        "Miss Marple",
-      TRUE ~ series
-    ),
     series = replace_na(series, "Not part of a series")
   ) |>
   summarize_series()
@@ -110,10 +141,22 @@ colors <- c(
 
 # Fonts ------------------------------------------------------------------
 
-font_add_google("Libre Baskerville", "libreB")
+# font_add_google("Libre Baskerville", "libreB")
+font_add(
+  "libreB",
+  regular = "fonts/LibreBaskerville-Regular.ttf",
+  bold = "fonts/LibreBaskerville-Bold.ttf"
+)
 
 
-font_add_google("Merriweather", "merriW")
+# font_add_google("Merriweather", "merriW")
+
+font_add(
+  "merriW",
+  regular = "fonts/Merriweather-Regular.ttf",
+  bold = "fonts/Merriweather-Bold.ttf"
+)
+
 
 font_add(
   "fa6-brands",
@@ -141,7 +184,7 @@ make_tmap <- function(df, title) {
       family = "merriW",
       fontface = "bold",
       size = 18,
-      alpha = .92
+      alpha = .84
     ) +
     geom_treemap_text(
       aes(label = scales::percent(pct)),
