@@ -10,3 +10,6 @@ This repository contains my contributions to the challenge, including
 - [Agatha Christie's
   bibliography](https://docs.google.com/spreadsheets/d/1A8ZRe5KLLAllhT31pCzke4j5qAPqeMKf0jYgyJXcoPs/edit#gid=0)
    by [Nicole Mark](https://www.nicoledesignsdata.net/)
+
+- [Pokédex](https://kaggle.com/datasets/rzgiza/pokdex-for-all-1025-pokemon-w-text-description)
+  by [Robert Giza](https://github.com/rzgiza)
