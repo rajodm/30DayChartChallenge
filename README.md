@@ -13,3 +13,6 @@ This repository contains my contributions to the challenge, including
 
 - [Pokédex For All 1025 Pokémon](https://kaggle.com/datasets/rzgiza/pokdex-for-all-1025-pokemon-w-text-description)
   by [Robert Giza](https://github.com/rzgiza)
+
+- [Sea Ice Index, National Snow and Ice Data
+  Center](https://nsidc.org/data/g02135)
