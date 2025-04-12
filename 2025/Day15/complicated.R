@@ -153,7 +153,7 @@ chordDiagramFromDataFrame(
   link.border = color_white,
   link.lwd = 0.8,
   grid.col = pal,
-  transparency = 0.45,
+  transparency = 0.35,
   annotationTrack = c("name", "grid"),
   annotationTrackHeight = mm_h(c(2, 3)),
   link.largest.ontop = TRUE

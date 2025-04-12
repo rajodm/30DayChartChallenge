@@ -39,9 +39,8 @@ color_blue <- "#768fad"
 title <- "Arctic and Antarctic Sea Ice Extent (1978-2024)"
 
 subtitle <- glue::glue(
-  "Deviations from the 1981-2010 climatological baselines.",
-  "The color scale ranges from <span style = 'color: {color_blue}'>**blue (more extent than average)**</span> through **white (near average)**, to <span style = 'color: {color_red}'>**red (below average)**</span>, with color intensity indicating the magnitude of deviation.<br>",
-  "Separate baselines are applied to the Northern (Arctic) and Southern (Antarctic) regions to reflect their distinct sea ice dynamics."
+  "Deviations from the 1981-2010 climatological baselines.<br>",
+  "The color scale ranges from <span style = 'color: {color_blue}'>**blue (more extent than average)**</span> through **white (near average)**, to <span style = 'color: {color_red}'>**red (below average)**</span>, with color intensity indicating the magnitude of deviation.<br>"
 )
 
 # Caption
@@ -103,7 +102,7 @@ stripe_chart <- function(
       "text",
       x = 1978,
       y = .46,
-      label = region,
+      label = glue::glue("{region}, baseline: {round(midpoint, 2)}M km²"),
       color = color_dark2,
       fontface = "bold",
       size = 4.8,
@@ -160,7 +159,7 @@ final_plot <- p1 /
         halign = 0.5,
         size = 13,
         lineheight = 1.3,
-        margin = margin(t = 12, b = 38)
+        margin = margin(t = 8, b = 32)
       ),
       plot.caption.position = "plot",
       plot.caption = element_textbox_simple(
