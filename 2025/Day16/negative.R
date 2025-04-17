@@ -3,6 +3,7 @@
 library(tidyverse)
 library(ggtext)
 library(showtext)
+library(grid)
 
 # Fonts ------------------------------------------------------------------
 
@@ -47,9 +48,25 @@ color_bg <- "#1e1d24"
 color_grey <- "#8a8895"
 color_grey1 <- "#3a3842"
 
-pal <- c(
-  "Gain" = "#71a4c4",
-  "Loss" = "#d07880"
+pal <- list(
+  # "Gain" = "#71a4c4",
+  "Gain" = linearGradient(
+    c("#62a0c4", "#a5cfe9"),
+    x1 = 0.5,
+    x2 = 0.5,
+    y1 = 0,
+    y2 = 1,
+    group = FALSE
+  ),
+  "Loss" = linearGradient(
+    c("#f59fac", "#d07880"),
+    x1 = 0.5,
+    x2 = 0.5,
+    y1 = 0,
+    y2 = 1,
+    group = FALSE
+  )
+  # "Loss" = "#d07880"
 )
 
 
