@@ -25,11 +25,13 @@ showtext_opts(dpi = 300)
 # Colors -----------------------------------------------------------------
 
 color_bg <- "#f4f0ec"
+color_neutral <- "#d7d2c2"
 color_black <- "#101a24"
 color_teal <- "#5c9da3"
 color_indigo <- "#6c75a4"
-color_cap <- "#74777b"
-color_grey <- "#474c5e"
+color_cap <- "#8d7a62"
+color_grey <- "#464850"
+color_grey1 <- "#74777b"
 pal <- c(
   N = color_teal,
   S = color_indigo
@@ -106,10 +108,10 @@ plot <- sea_ice |>
     panel.grid.minor = element_blank(),
     panel.grid.major.x = element_line(
       linewidth = 0.1,
-      linetype = "dashed",
-      color = color_cap
+      linetype = "31",
+      color = color_neutral
     ),
-    panel.grid.major.y = element_line(linewidth = 0.3, color = color_cap),
+    panel.grid.major.y = element_line(linewidth = 0.4, color = color_neutral),
     axis.title.x = element_text(
       size = 13,
       margin = margin(t = 6),
@@ -117,7 +119,8 @@ plot <- sea_ice |>
       hjust = 1
     ),
     axis.title.y = element_blank(),
-    axis.text.y = element_text(hjust = 0),
+    axis.text.y = element_text(hjust = 0, color = color_grey1),
+    axis.text.x = element_text(color = color_grey1),
     plot.title.position = "plot",
     plot.title = element_textbox_simple(
       color = color_black,
