@@ -88,7 +88,7 @@ color_grey1 <- colorspace::adjust_transparency(color_grey, 0.8)
 color_blue <- "#1a4f8c"
 color_blue1 <- "#66a0c8"
 color_blue2 <- "#abcfe2"
-color_cap <- "#8d7a62"
+color_cap <- "#928b82"
 
 pals <- c(
   "High-Income Countries" = color_blue,
@@ -116,7 +116,7 @@ p <- plot_data |>
     aes(xintercept = year, label = event, hjust = just),
     color = color_grey1,
     alpha = .6,
-    size = 2.4,
+    size = 2.6,
     linewidth = .3,
     linetype = "31"
   ) +
@@ -155,7 +155,7 @@ p <- plot_data |>
       color = color_black1,
       margin = margin(r = 4)
     ),
-    strip.background = element_rect(fill = color_grid, color = NA),
+    strip.background = element_rect(fill = "#eae6e2", color = NA),
     strip.text.x = element_text(
       size = 10,
       face = "bold",
