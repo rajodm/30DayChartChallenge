@@ -55,20 +55,14 @@ plot_data <- venom_toxicity |>
 # Fonts ------------------------------------------------------------------
 
 font_add(
-  "workS",
-  "fonts/WorkSans-Regular.ttf",
-  "fonts/WorkSans-Bold.ttf"
-)
-
-font_add(
-  "quickS",
-  "fonts/Quicksand-Regular.ttf",
-  "fonts/Quicksand-Bold.ttf"
-)
-
-font_add(
   "fa6-brands",
   "fonts/Font Awesome 6 Brands-Regular-400.otf"
+)
+
+font_add(
+  "inter",
+  "fonts/Inter_18pt-Regular.ttf",
+  "fonts/Inter_18pt-Bold.ttf"
 )
 
 showtext_auto()
@@ -76,10 +70,11 @@ showtext_opts(dpi = 600)
 
 # Colors -----------------------------------------------------------------
 
-color_bg <- "#fdfcfa"
+color_bg <- "#f4f0ec"
 color_black <- "#101a24"
+color_title <- "#2d3741"
 color_cap <- "#928b82"
-color_gray <- "#464850"
+color_gray <- "#3c4a56"
 color_red <- "#8c2e2e"
 color_blue <- "#6694bc"
 color_green <- "#5c9864"
@@ -88,25 +83,25 @@ pal <- c(
   "Unclear Toxicity" = color_blue,
   "Non-Venomous" = color_green,
   "Venomous Bite - Extremely Dangerous" = color_red,
-  "Venomous Bite - Very Dangerous" = "#aa4a4a",
-  "Venomous Bite - Dangerous" = "#c26563",
-  "Venomous Bite - Potentially Dangerous" = "#d69290",
-  "Venomous Bite - Unknown Dangerousness" = "#eababa",
+  "Venomous Bite - Very Dangerous" = "#b23b3b",
+  "Venomous Bite - Dangerous" = "#d35f5f",
+  "Venomous Bite - Potentially Dangerous" = "#e08080",
+  "Venomous Bite - Unknown Dangerousness" = "#eaa7a7",
   "Venomous Bite - Harmless To Humans" = "#f8dad9",
   "Non-Venomous Constrictor - extremely Dangerous" = color_red,
-  "Non-Venomous Constrictor - Very Dangerous" = "#aa4a4a",
-  "Non-Venomous Constrictor - Dangerous" = "#c26563",
-  "Non-Venomous Constrictor - Potentially Dangerous" = "#d69290",
+  "Non-Venomous Constrictor - Very Dangerous" = "#b23b3b",
+  "Non-Venomous Constrictor - Dangerous" = "#d35f5f",
+  "Non-Venomous Constrictor - Potentially Dangerous" = "#e08080",
   "Non-Venomous Constrictor - Harmless To Humans" = "#f8dad9",
-  "Unknown" = "#d6d4d1",
-  "family_color" = "#d6d4d1"
+  "Unknown" = "#9a9a9a",
+  "family_color" = "#9a9a9a"
 )
 
 # Texts ------------------------------------------------------------------
 
 # Caption
 data <- glue::glue(
-  "**Data**: Snake Dangerousness and Toxicity by Species - https:\\/\\/snakedb.org"
+  "**Data**: Snake Toxicity & Dangerousness by Species - https:\\/\\/snakeDB.org"
 )
 chart <- glue::glue(
   "**#30DayChartChallenge 2025, Day 25**: Uncertainties - Risk"
@@ -116,13 +111,13 @@ author <- glue::glue("**Graphic**: {bsky} @rajodm")
 caption_text <- glue::glue("{data}<br>{chart} | {author} | #rstats")
 
 # Text
-title <- "Snake Species: Taxonomic Families and Human Risk Profiles"
+title <- "Snake Species: Taxonomic Families and Risk Profiles"
 subtitle <- glue::glue(
   "This diagram illustrates how snakes from 32 taxonomic families vary in their risk to humans. ",
   "Some are <span style='color: {color_red}'>**venomous**</span>, ",
   "others <span style='color: {color_red}'>**hazardous because of their size once fully grown**</span> (non-venomous constrictors),",
   " and some have <span style='color: {color_blue}'>**uncertain toxicity profiles**</span>.",
-  " Some species, however, have <span style='color: {color_green}'>**minimal impact on human safety**</span> (non-venomous/harmless to humans)."
+  " Some species, however, have <span style='color: {color_green}'>**minimal impact on human safety**</span> (non-venomous/harmless to humans)"
 )
 
 # plot -------------------------------------------------------------------
@@ -134,62 +129,66 @@ plot <- plot_data |>
     node = node,
     next_node = next_node,
     fill = fill_color,
+    flow.fill = "#bcbcbc"
   )) +
   geom_sankey(
     flow.alpha = .6,
     alpha = .8,
-    width = .54,
+    width = .5,
+    smooth = 8,
     space = 380,
+    color = "transparent",
     show.legend = FALSE
   ) +
   geom_sankey_text(
     aes(label = node),
     size = 3.8,
     space = 380,
-    width = .52,
     color = color_black,
   ) +
   scale_fill_manual(values = pal) +
   scale_x_discrete(
     labels = c("Family", "Toxicity & Dangerousness"),
     position = "top",
-    expand = expansion(mult = c(0.1, 0.1))
+    expand = expansion(mult = c(0.01, 0.01))
   ) +
   scale_y_discrete(expand = expansion(mult = c(0.007, 0.007))) +
   coord_cartesian(
     clip = "off",
+    expand = FALSE
   ) +
   labs(
     title = title,
     subtitle = subtitle,
     caption = caption_text
   ) +
-  theme_sankey(base_family = "workS", base_size = 14) +
+  theme_sankey(base_family = "inter", base_size = 14) +
   theme(
     text = element_text(color = color_black),
     plot.background = element_rect(fill = color_bg, color = NA),
     panel.background = element_rect(fill = color_bg, color = NA),
-    plot.margin = margin(15, 25, 5, 25),
+    plot.margin = margin(1.2, 1, .5, 1, "cm"),
     axis.title.x = element_blank(),
     axis.text.x = element_markdown(
-      family = "quickS",
+      family = "inter",
       size = 11,
       color = color_gray,
       margin = margin(b = 1)
     ),
     plot.title.position = "plot",
-    plot.title = element_text(
+    plot.title = element_textbox_simple(
+      color = color_black,
       face = "bold",
-      size = 18,
+      size = 22,
       margin = margin(b = 4),
-      hjust = .5
+      halign = .5
     ),
     plot.subtitle = element_textbox_simple(
-      family = "quickS",
-      color = color_gray,
-      size = 11,
+      family = "inter",
+      color = color_title,
+      size = 12,
       halign = .5,
-      margin = margin(b = 8)
+      margin = margin(b = 14)
     ),
     plot.caption.position = "plot",
     plot.caption = element_textbox_simple(
@@ -203,8 +202,8 @@ plot <- plot_data |>
 ggsave(
   "2025/charts/day25-risk.png",
   plot,
-  width = 11,
-  height = 8.5,
-  units = "in",
+  width = 29.7,
+  height = 21,
+  units = "cm",
   dpi = 600
 )
