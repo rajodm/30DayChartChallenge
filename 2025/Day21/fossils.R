@@ -180,7 +180,7 @@ p <- plot_data |>
     plot.caption.position = "plot",
     plot.caption = element_textbox_simple(
       color = color_cap,
-      size = 5.6,
+      size = 6,
       halign = 1,
       margin = margin(t = 12)
     ),
