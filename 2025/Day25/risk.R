@@ -42,7 +42,7 @@ plot_data <- venom_toxicity |>
   # Create the data for ggsankey
   make_long(family, toxicity_dangerousness) |>
   mutate(
-    # Usefull for the colors
+    # Useful for the colors
     fill_color = case_when(
       node %in% venom_toxicity$toxicity_dangerousness ~ node,
       TRUE ~ "family_color"
@@ -151,7 +151,7 @@ plot <- plot_data |>
   ) +
   scale_fill_manual(values = pal) +
   scale_x_discrete(
-    labels = c("Family", "Toxicity & Dangrousness"),
+    labels = c("Family", "Toxicity & Dangerousness"),
     position = "top",
     expand = expansion(mult = c(0.1, 0.1))
   ) +
