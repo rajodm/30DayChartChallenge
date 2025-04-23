@@ -66,7 +66,7 @@ font_add(
 )
 
 showtext_auto()
-showtext_opts(dpi = 600)
+showtext_opts(dpi = 460)
 
 # Colors -----------------------------------------------------------------
 
@@ -205,5 +205,5 @@ ggsave(
   width = 29.7,
   height = 21,
   units = "cm",
-  dpi = 600
+  dpi = 460
 )
