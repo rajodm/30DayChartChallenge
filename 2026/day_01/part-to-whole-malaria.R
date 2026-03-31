@@ -97,14 +97,18 @@ plot_data <-
     values_to = "prop",
     names_pattern = "(.*)_.*"
   ) |>
-  dplyr::arrange(continent, dplyr::desc(Parasite)) |>
+  dplyr::arrange(continent, Parasite) |>
   dplyr::mutate(
     .by = continent,
     lab_y = cumsum(prop) - prop / 2
   )
 
 plot <- plot_data |>
-  ggplot2::ggplot(ggplot2::aes(continent, prop, fill = Parasite)) +
+  ggplot2::ggplot(ggplot2::aes(
+    continent,
+    prop,
+    fill = factor(Parasite, levels = c("pv", "pf"))
+  )) +
   ggplot2::geom_col(
     position = "fill",
     stat = "identity",
