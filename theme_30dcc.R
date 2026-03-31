@@ -38,7 +38,8 @@ theme_30dcc <- function(
         face = "bold",
         family = "Syne",
         color = pal$ink,
-        margin = ggplot2::margin(b = 6)
+        lineheight = 1.1,
+        margin = ggplot2::margin(b = 8)
       ),
       subtitle = ggtext::element_textbox_simple(
         size = base_size,
@@ -77,15 +78,6 @@ theme_30dcc <- function(
     ) +
     ggplot2::theme_sub_legend(
       position = "none"
-    ) +
-    ggplot2::theme_sub_strip(
-      text = ggplot2::element_text(
-        size = 14,
-        face = "bold",
-        margin = ggplot2::margin_part(b = 2, l = 0),
-        hjust = 0
-      ),
-      clip = "off"
     )
 
   if (grid == "y") {
