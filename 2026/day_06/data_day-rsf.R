@@ -101,7 +101,7 @@ plot <- rsf_score_af_data |>
   ggplot2::geom_point(size = 1.6) +
   ggplot2::geom_text(
     ggplot2::aes(label = round(score, 0)),
-    nudge_y = 10,
+    nudge_y = 16,
     size = 3.15
   ) +
   ggplot2::geom_line(linewidth = 0.6) +
@@ -147,16 +147,16 @@ plot <- rsf_score_af_data |>
   ggplot2::theme_sub_strip(
     text = ggplot2::element_text(
       size = 9,
-      margin = ggplot2::margin_part(b = -3)
+      margin = ggplot2::margin_part(b = 2)
     ),
     clip = "off"
   )
 
 ggh4x::save_plot(
-  "test.png",
+  here::here("2026/charts", "2026_day_06-rsf_wpfi.png"),
   plot = plot,
   width = 21,
-  height = 29.1,
+  height = 25,
   units = "cm",
   dpi = 600
 )
