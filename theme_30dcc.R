@@ -74,6 +74,18 @@ theme_30dcc <- function(
       ),
       key.size = ggplot2::unit(0.9, "lines"),
       background = ggplot2::element_rect(fill = pal$paper, color = NA)
+    ) +
+    ggplot2::theme_sub_legend(
+      position = "none"
+    ) +
+    ggplot2::theme_sub_strip(
+      text = ggplot2::element_text(
+        size = 14,
+        face = "bold",
+        margin = ggplot2::margin_part(b = 2, l = 0),
+        hjust = 0
+      ),
+      clip = "off"
     )
 
   if (grid == "y") {
