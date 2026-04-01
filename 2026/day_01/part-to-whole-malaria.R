@@ -28,24 +28,24 @@ source("theme_30dcc.R")
 # pf_inc_count_r2025 <- getRaster("Malaria__202508_Global_Pf_Incidence_Count")
 # pv_inc_count_r2025 <- getRaster("Malaria__202508_Global_Pv_Incidence_Count")
 
-# pv_inc_count <- terra::rast("pv_incidence_2025.tif")
-# pf_inc_count <- terra::rast("pf_incidence_2025.tif")
+# pv_inc_count <- terra::rast("data26/malariaAtlas/pv_incidence_2025.tif")
+# pf_inc_count <- terra::rast("data26/malariaAtlas/pf_incidence_2025.tif")
 
 # Needed because the raster data doesn't have regions
-world <- rnaturalearth::ne_countries(returnclass = "sf")
+world <- rnaturalearth::ne_countries(type = "map_units", returnclass = "sf")
 
 world_vect <- terra::vect(world)
 
 extracted_pf <- terra::extract(
   pf_inc_count,
   world_vect,
-  fun = mean,
+  fun = sum,
   na.rm = TRUE
 )
 extracted_pv <- terra::extract(
   pv_inc_count,
   world_vect,
-  fun = mean,
+  fun = sum,
   na.rm = TRUE
 )
 
@@ -78,7 +78,7 @@ title_text <- glue::glue(
 )
 
 subtitle_text <- glue::glue(
-  "<span style='color: {color_pf};'>***P. falciparum***</span> species accounts for over 98% of malaria cases in Africa and 73% in North America, while <span style='color: {color_pv};'>***P. vivax***</span> represents the majority in Asia, Oceania and South America."
+  "<span style='color: {color_pf};'>***P. falciparum***</span> species accounts for over 98% of malaria cases in Africa and 68% in North America, while <span style='color: {color_pv};'>***P. vivax***</span> represents the majority in Asia, Oceania and South America."
 )
 
 caption_text <- add_caption(
@@ -118,7 +118,7 @@ plot <- plot_data |>
   ) +
   ggplot2::geom_text(
     ggplot2::aes(
-      label = scales::percent(prop, accuracy = 0.01),
+      label = if_else(prop == 0, "", scales::percent(prop, accuracy = 0.01)),
       y = lab_y,
       color = dplyr::if_else(prop <= 0.02, "#1a1a1a", "#f8f8f8")
     ),
@@ -167,7 +167,7 @@ plot <- plot_data |>
   )
 
 ggh4x::save_plot(
-  here::here("2026/charts", "2026_day01-part-to-whole.png"),
+  here::here("2026/charts", "2026_day01-part-to-whole_corrected.png"),
   plot = plot,
   width = 21,
   height = 25,
