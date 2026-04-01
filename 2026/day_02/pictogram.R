@@ -60,7 +60,7 @@ subtitle_text <- glue::glue(
   " Country name, survey year and positivity rate are shown above each panel."
 )
 
-add_caption(
+caption_text <- add_caption(
   note = "**Survey years vary (1985-2022). Most recent available Pf PR<sub>2-10</sub> survey per country shown**",
   "Malaria Atlas Project (malariaatlas.org) - *P. falciparum* parasite rate survey | {malariaAtlas} R package",
   "Comparisons - Pictogram",
