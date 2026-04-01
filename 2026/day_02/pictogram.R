@@ -27,7 +27,7 @@ source("theme_30dcc.R")
 # Data -------------------------------------------------------------------
 
 pf_pr <- malariaAtlas::getPR(
-  country = "ALL",
+  # country = "ALL",
   continent = "Africa",
   species = "Pf"
 )
@@ -51,6 +51,27 @@ pr_last_af <- pf_pr |>
   slice_max(year_start, n = 1, by = country) |>
   filter_out(pr_weighted <= 0.005) # Remove parasite rate lower than 0.5%
 
+plot_data <- pr_last_af |>
+  mutate(
+    pr_prop = round(pr_weighted * 100),
+    not_infc = 100 - pr_prop,
+    prop_labs = scales::percent(pr_weighted, 0.1)
+  ) |>
+  arrange(desc(pr_prop)) |>
+  mutate(
+    country = replace_values(
+      country,
+      "Central African Republic" ~ "C. African Rep."
+    ),
+    labs = glue::glue("{country}<br>{year_start} \\- {prop_labs}"),
+    labs = fct_inorder(labs)
+  ) |>
+  pivot_longer(
+    cols = c(pr_prop, not_infc),
+    names_to = "status",
+    values_to = "prop"
+  )
+
 # Texts ------------------------------------------------------------------
 title_text <- "Malaria burden in African children varies widely from less than 1% to over 60%"
 
@@ -69,26 +90,7 @@ caption_text <- add_caption(
 
 # Plot -------------------------------------------------------------------
 
-plot <- pr_last_af |>
-  mutate(
-    pr_prop = ceiling(pr_weighted * 100), # round up to ge a full icon
-    not_infc = 100 - pr_prop,
-    prop_labs = scales::percent(pr_weighted, 0.1)
-  ) |>
-  arrange(desc(pr_prop)) |>
-  mutate(
-    country = replace_values(
-      country,
-      "Central African Republic" ~ "C. African Rep."
-    ),
-    labs = glue::glue("{country}<br>{year_start} \\- {prop_labs}"),
-    labs = fct_inorder(labs)
-  ) |>
-  pivot_longer(
-    cols = c(pr_prop, not_infc),
-    names_to = "status",
-    values_to = "prop"
-  ) |>
+plot <- plot_data |>
   ggplot() +
   geom_pictogram(
     aes(label = status, values = prop, color = status),
