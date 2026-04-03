@@ -1,5 +1,10 @@
+# Packages ---------------------------------------------------------------
+
 library(tidyverse)
 library(ggimage)
+
+
+# Colors & Theme ---------------------------------------------------------
 
 palettes <- list(
   paper = "#171717",
@@ -11,6 +16,8 @@ palettes <- list(
 )
 
 source("theme_30dcc.R")
+
+# Data -------------------------------------------------------------------
 
 af <- rnaturalearth::ne_countries(
   # type = "map_units",
@@ -37,7 +44,7 @@ af_data <- af_countries |>
   dplyr::mutate(
     new_code = stringr::str_to_lower(iso_a2),
   ) |>
-  dplyr::pivot_wider(
+  tidyr::pivot_wider(
     names_from = year,
     values_from = incidence_of_malaria_per_1_000_population_at_risk,
     names_prefix = "year_"
@@ -55,9 +62,11 @@ annotations_df <- tibble::tribble(
   100 , 300 , "↑ Incidence Increased"
 )
 
+# Texts ------------------------------------------------------------------
+
 title_text <- "Six African countries saw malaria incidence rise by at least 10 cases per 1,000 between 2022 and 2024"
 
-subtitle_text <- "Labelled countries recorded an increase of at least 10 *Plasmodium falciparum* (Pf) malaria cases per 1,000 people between 2022 and 2024. Other countries recorded smaller increases, decreases, or no meaningful change."
+subtitle_text <- "Labelled countries recorded an increase of at least 10 *Plasmodium falciparum* malaria cases per 1,000 people between 2022 and 2024. Other countries recorded smaller increases, decreases, or no meaningful change."
 
 caption_text <- add_caption(
   note = "*Pf* incidence rate based on modelled estimates",
@@ -65,6 +74,8 @@ caption_text <- add_caption(
   title = "Comparisons - Slope",
   day = "04"
 )
+
+# Plot -------------------------------------------------------------------
 
 plot <- af_data |>
   ggplot2::ggplot(ggplot2::aes(year_2022, year_2024)) +
@@ -147,6 +158,15 @@ plot <- af_data |>
     caption = caption_text
   ) +
   theme_30dcc() +
+  ggplot2::theme_sub_plot(
+    subtitle = ggtext::element_textbox_simple(
+      margin = ggplot2::margin(t = 6),
+    ),
+    caption = ggtext::element_textbox_simple(
+      margin = ggplot2::margin(t = 6),
+      halign = 1
+    )
+  ) +
   ggplot2::theme_sub_axis_y(
     title = ggplot2::element_blank()
   ) +
