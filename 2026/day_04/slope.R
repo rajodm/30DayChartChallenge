@@ -8,11 +8,11 @@ library(ggimage)
 
 palettes <- list(
   paper = "#171717",
-  ink = "#e8e4dc",
-  color_sub = "#a89f91",
-  color_muted = "#6b6459",
-  color_grid = "#2c2925",
-  color_accent = "#c8a97e"
+  ink = "#e6e6e4",
+  color_sub = "#969693",
+  color_muted = "#5e5e5c",
+  color_grid = "#272725",
+  color_accent = "#89b4a0"
 )
 
 source("theme_30dcc.R")
@@ -179,7 +179,7 @@ plot <- af_data |>
   )
 
 ggh4x::save_plot(
-  here::here("2026/charts", "2026_day04-slope.png"),
+  here::here("2026/charts", "2026_day04-slope1.png"),
   plot = plot,
   width = 25,
   height = 25,
