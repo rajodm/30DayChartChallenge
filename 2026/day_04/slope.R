@@ -37,8 +37,7 @@ af_countries <- af |>
   dplyr::left_join(malaria_inc, dplyr::join_by(iso_a3 == code)) |>
   sf::st_drop_geometry() |>
   tibble::as_tibble() |>
-  dplyr::filter(year %in% c(2022, 2024))
-
+  dplyr::filter(year %in% c(2023, 2024))
 
 af_data <- af_countries |>
   dplyr::mutate(
@@ -50,7 +49,7 @@ af_data <- af_countries |>
     names_prefix = "year_"
   ) |>
   dplyr::mutate(
-    ir_change = (year_2024 - year_2022) >= 10,
+    ir_change = (year_2024 - year_2023) >= 10,
   )
 
 increased_inc <- af_data |>
@@ -64,13 +63,13 @@ annotations_df <- tibble::tribble(
 
 # Texts ------------------------------------------------------------------
 
-title_text <- "Six African countries saw malaria incidence rise by at least 10 cases per 1,000 between 2022 and 2024"
+title_text <- "Six African countries saw malaria incidence rise by at least 10 cases per 1,000 population between 2023 and 2024"
 
-subtitle_text <- "Labelled countries recorded an increase of at least 10 *Plasmodium falciparum* malaria cases per 1,000 people between 2022 and 2024. Other countries recorded smaller increases, decreases, or no meaningful change."
+subtitle_text <- "Each flag represents a country's *Plasmodium falciparum* incidence rate. Countries above the diagonal line recorded higher incidence in 2024 than in 2023, with 6 showing an increase of at least 10 cases per 1,000 population."
 
 caption_text <- add_caption(
-  note = "*Pf* incidence rate based on modelled estimates",
-  source = "Malaria Atlas Project (malariaatlas.org) - Pf incidence rate 2022 & 2024",
+  note = "*P. falciparum* incidence rate based on modelled estimates",
+  source = "Malaria Atlas Project (malariaatlas.org) - Pf incidence rate 2023 & 2024",
   title = "Comparisons - Slope",
   day = "04"
 )
@@ -78,11 +77,11 @@ caption_text <- add_caption(
 # Plot -------------------------------------------------------------------
 
 plot <- af_data |>
-  ggplot2::ggplot(ggplot2::aes(year_2022, year_2024)) +
+  ggplot2::ggplot(ggplot2::aes(year_2023, year_2024)) +
   ggplot2::annotate(
     "polygon",
-    x = c(0, 425, 0),
-    y = c(0, 425, 425),
+    x = c(0, 400, 0),
+    y = c(0, 400, 400),
     fill = palettes$color_muted,
     alpha = 0.12
   ) +
@@ -99,8 +98,8 @@ plot <- af_data |>
     family = "Atkinson Hyperlegible Next",
     min.segment.length = 0.6,
     box.padding = 0.8,
-    nudge_y = 10,
-    nudge_x = -25,
+    nudge_y = 14,
+    nudge_x = -38,
     color = palettes$ink
   ) +
   ggplot2::geom_abline(
@@ -137,24 +136,15 @@ plot <- af_data |>
     arrow_head = ggarrow::arrow_head_minimal(),
     arrow_fins = ggarrow::arrow_fins_minimal()
   ) +
-  ggplot2::scale_y_continuous(
-    breaks = c(100, 200, 300, 400),
-    labels = \(x) {
-      dplyr::if_else(
-        x == 400,
-        paste(x, "cases\nper 1000\nin 2024"),
-        (x) |> as.character()
-      )
-    }
-  ) +
   ggplot2::coord_cartesian(
-    expand = FALSE,
+    # expand = FALSE,
     clip = "off"
   ) +
   ggplot2::labs(
     title = title_text,
     subtitle = subtitle_text,
-    x = "\\# *P. falciparum* cases per 1,000 in 2022",
+    x = "\\# *P. falciparum* cases per 1,000 in 2023",
+    y = "\\# *P. falciparum* cases per 1,000 in 2024",
     caption = caption_text
   ) +
   theme_30dcc() +
@@ -168,7 +158,12 @@ plot <- af_data |>
     )
   ) +
   ggplot2::theme_sub_axis_y(
-    title = ggplot2::element_blank()
+    title = ggtext::element_textbox_simple(
+      halign = 0.5,
+      margin = ggplot2::margin(b = 10),
+      face = "bold",
+      orientation = "left-rotated"
+    )
   ) +
   ggplot2::theme_sub_axis_x(
     title = ggtext::element_textbox_simple(
@@ -179,7 +174,7 @@ plot <- af_data |>
   )
 
 ggh4x::save_plot(
-  here::here("2026/charts", "2026_day04-slope1.png"),
+  here::here("2026/charts", "2026_day04-slope.png"),
   plot = plot,
   width = 25,
   height = 25,
