@@ -23,9 +23,9 @@ palettes <- list(
 world <- rnaturalearth::ne_countries(scale = "medium", returnclass = "sf") |>
   dplyr::filter_out(name == "Antarctica")
 
-pf_rast <- terra::rast(
-  "data26/malariaAtlas/Malaria__202508_Global_Pf_Incidence_Rate_latest__2026_04_02.tiff"
-)
+# pf_rast <- terra::rast(
+#   "data26/malariaAtlas/Malaria__202508_Global_Pf_Incidence_Rate_latest__2026_04_02.tiff"
+# )
 
 pf_mean <- (pf_rast[[1]] * 1000) |>
   tidyterra::rename(
