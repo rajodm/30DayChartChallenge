@@ -77,7 +77,7 @@ tm_equal <-
   tmap::tm_crs(4326) +
   base_map +
   tmap::tm_title(
-    "Plasmodium falciparum incidence rate, 2024: tow classification approaches",
+    "Plasmodium falciparum incidence rate, 2024: two classification approaches",
     color = palettes$ink,
     fontface = "bold",
     fontfamily = "syne",
