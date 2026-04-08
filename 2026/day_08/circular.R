@@ -83,7 +83,7 @@ plot <- mr10y |>
   ggplot2::guides(
     fill = ggplot2::guide_colorbar(
       display = "gradient",
-      title = "Deaths rate per 100k, 2024",
+      title = "Deaths per 100k, 2024",
       barwidth = 14,
       barheight = 0.5,
       nbin = 100
