@@ -22,6 +22,8 @@ color_blue <- "#d6e4ec"
 color_border <- "#7a7d84"
 color_gray <- "#d4d6da"
 
+# Data -------------------------------------------------------------------
+
 nga_admin1 <- geodata::gadm("NGA") |>
   janitor::clean_names() |>
   sf::st_as_sf(crs = sf::st_crs(4326))
