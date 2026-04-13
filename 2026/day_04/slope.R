@@ -25,8 +25,7 @@ af <- rnaturalearth::ne_countries(
   returnclass = "sf"
 )
 
-# Data was downloaded directly from MAP website
-# available at https://data.malariaatlas.org/trends
+# Data from Our World in Data : https://ourworldindata.org/grapher/incidence-of-malaria
 # malaria_inc <- read_csv(here::here(
 #   "data26/incidence-of-malaria.csv"
 # )) |>
@@ -69,7 +68,7 @@ subtitle_text <- "Each flag represents a country's *Plasmodium falciparum* incid
 
 caption_text <- add_caption(
   note = "*P. falciparum* incidence rate based on modelled estimates",
-  source = "Malaria Atlas Project (malariaatlas.org) - Pf incidence rate 2023 & 2024",
+  source = "World Health Organization (Global Health Observatory), via World Bank (2026) | processed by Our World in Data",
   title = "Comparisons - Slope",
   day = "04"
 )
@@ -174,7 +173,7 @@ plot <- af_data |>
   )
 
 ggh4x::save_plot(
-  here::here("2026/charts", "2026_day04-slope.png"),
+  here::here("2026/charts", "2026_day04-slope1.png"),
   plot = plot,
   width = 25,
   height = 25,
