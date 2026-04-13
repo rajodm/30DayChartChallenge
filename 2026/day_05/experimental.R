@@ -25,8 +25,8 @@ af_sf <- rnaturalearth::ne_countries(
   type = "map_units"
 )
 
-# # Data is available on malariaatlas.org
-# malaria_inc <- readr::read_csv(here::here(
+# Data from Our World in Data : https://ourworldindata.org/grapher/incidence-of-malaria
+# malaria_inc <- read_csv(here::here(
 #   "data26/incidence-of-malaria.csv"
 # )) |>
 #   janitor::clean_names()
@@ -88,7 +88,7 @@ subtitle_text <- glue::glue(
 )
 
 caption_text <- add_caption(
-  source = "Malaria Atlas Project (malariaatlas.org) - Pf incidence rate 2023 & 2024",
+  source = "World Health Organization (Global Health Observatory), via World Bank (2026) | processed by Our World in Data",
   title = "Comparisons - Experimental",
   day = "05"
 )
