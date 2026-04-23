@@ -1,4 +1,6 @@
 library(tidyverse)
+# ! facets are not correctly aligned when using {geofacet} 0.2.4
+# # solution: `pak::pak("hafen/geofacet")` to get v 0.2.5
 library(geofacet)
 
 
