@@ -48,7 +48,7 @@ subtitle_text <- glue::glue(
 caption_text <- add_caption(
   note = "Size legend capped at 20,000 for readability; method used for diagnostic may differ for each site.",
   source = "Malaria Atlas Project (malariaatlas.org) - PR surveys",
-  title = "Relationship - South China Morning Post - Theme Day",
+  title = "Timeseries - South China Morning Post - Theme Day",
   day = 24
 )
 
