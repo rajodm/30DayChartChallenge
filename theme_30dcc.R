@@ -1,7 +1,7 @@
 add_caption <- function(source, title, note = NULL, year = 2026, day) {
   author <- "Andriambelo Rajo"
   glue::glue(
-    if_else(!is.null(note), "**Note**: {note}<br>", ""),
+    dplyr::if_else(!is.null(note), "**Note**: {note}<br>", ""),
     "**Data source**: {source}<br>",
     "**#30DayChartChallenge {year}, Day {day}**: {title} | ",
     "**Graphic**: {author} | #rstats"
