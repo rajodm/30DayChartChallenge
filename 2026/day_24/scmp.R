@@ -129,7 +129,7 @@ plot <-
   MetBrewer::scale_color_met_c("Tam") +
   ggplot2::scale_size_area(
     max_size = 18,
-    breaks = c(500, 4000, 1100, 20000),
+    breaks = c(500, 4000, 11000, 20000),
     name = "People examined",
     labels = scales::label_number(scale_cut = scales::cut_short_scale()),
   ) +
