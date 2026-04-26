@@ -96,8 +96,8 @@ add_annotation <- function(
       y = arrow_point_y,
       xend = arrow_butt_x,
       yend = arrow_butt_y,
-      arrow_head = ggarrow::arrow_head_minimal(),
-      arrow_fins = ggarrow::arrow_fins_minimal(),
+      arrow_head = ggarrow::arrow_fins_minimal(),
+      arrow_fins = ggarrow::arrow_head_minimal(),
       linewidth = 0.5,
       curvature = curvature,
       color = color
