@@ -127,8 +127,9 @@ plot <-
     alpha = 0.8
   ) +
   MetBrewer::scale_color_met_c("Tam") +
-  ggplot2::scale_size_area(
-    max_size = 18,
+  ggplot2::scale_size_continuous(
+    transform = "sqrt",
+    range = c(1, 16),
     breaks = c(500, 4000, 11000, 20000),
     name = "People examined",
     labels = scales::label_number(scale_cut = scales::cut_short_scale()),
@@ -186,7 +187,7 @@ plot <-
         title.position = "top",
       ),
       override.aes = list(
-        size = c(3.2, 8.9, 14.8, 20),
+        size = c(2.529, 7.155, 11.865, 16),
         alpha = 0.2,
         color = palettes$color_sub
       )
