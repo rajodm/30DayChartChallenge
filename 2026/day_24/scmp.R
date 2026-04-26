@@ -96,7 +96,7 @@ add_annotation <- function(
       y = arrow_point_y,
       xend = arrow_butt_x,
       yend = arrow_butt_y,
-      arrow_head = ggarrow::arrow_fins_minimal(),
+      arrow_head = ggarrow::arrow_head_minimal(),
       arrow_fins = ggarrow::arrow_fins_minimal(),
       linewidth = 0.5,
       curvature = curvature,
@@ -129,7 +129,7 @@ plot <-
   MetBrewer::scale_color_met_c("Tam") +
   ggplot2::scale_size_continuous(
     transform = "sqrt",
-    range = c(1, 18),
+    range = c(1, 17),
     breaks = c(500, 4000, 11000, 20000),
     name = "People examined",
     labels = scales::label_number(scale_cut = scales::cut_short_scale()),
@@ -145,7 +145,7 @@ plot <-
   ggplot2::coord_cartesian(clip = "off") +
   theme_30dcc(base_family = "Inter", caption.hjust = 0) +
   ggplot2::theme_sub_plot(
-    margin = ggplot2::margin(24, 42, 8, 42),
+    margin = ggplot2::margin(20, 42, 8, 42),
     caption.position = "plot",
     caption = ggtext::element_textbox(
       size = 8,
@@ -187,7 +187,7 @@ plot <-
         title.position = "top",
       ),
       override.aes = list(
-        size = c(2.846, 8.049, 13.349, 18),
+        size = c(2.687, 7.602, 12.607, 17),
         alpha = 0.2,
         color = palettes$color_sub
       )
