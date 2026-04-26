@@ -129,7 +129,7 @@ plot <-
   MetBrewer::scale_color_met_c("Tam") +
   ggplot2::scale_size_continuous(
     transform = "sqrt",
-    range = c(1, 16),
+    range = c(1, 18),
     breaks = c(500, 4000, 11000, 20000),
     name = "People examined",
     labels = scales::label_number(scale_cut = scales::cut_short_scale()),
@@ -145,7 +145,7 @@ plot <-
   ggplot2::coord_cartesian(clip = "off") +
   theme_30dcc(base_family = "Inter", caption.hjust = 0) +
   ggplot2::theme_sub_plot(
-    margin = ggplot2::margin(16, 42, 8, 42),
+    margin = ggplot2::margin(24, 42, 8, 42),
     caption.position = "plot",
     caption = ggtext::element_textbox(
       size = 8,
@@ -187,7 +187,7 @@ plot <-
         title.position = "top",
       ),
       override.aes = list(
-        size = c(2.529, 7.155, 11.865, 16),
+        size = c(2.846, 8.049, 13.349, 18),
         alpha = 0.2,
         color = palettes$color_sub
       )
