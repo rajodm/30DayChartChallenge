@@ -46,7 +46,7 @@ subtitle_text <- glue::glue(
 )
 
 caption_text <- add_caption(
-  note = "Size legend capped at 20,000 for readability; method used for diagnostic may differ for each site.",
+  note = "Method used for diagnostic may differ for each site.",
   source = "Malaria Atlas Project (malariaatlas.org) - PR surveys",
   title = "Timeseries - South China Morning Post - Theme Day",
   day = 24
@@ -127,10 +127,9 @@ plot <-
     alpha = 0.8
   ) +
   MetBrewer::scale_color_met_c("Tam") +
-  ggplot2::scale_size_continuous(
-    transform = "sqrt",
-    range = c(1, 17),
-    breaks = c(500, 4000, 11000, 20000),
+  ggplot2::scale_size_area(
+    max_size = 18,
+    breaks = c(500, 8000, 20000, 40000),
     name = "People examined",
     labels = scales::label_number(scale_cut = scales::cut_short_scale()),
   ) +
@@ -145,7 +144,7 @@ plot <-
   ggplot2::coord_cartesian(clip = "off") +
   theme_30dcc(base_family = "Inter", caption.hjust = 0) +
   ggplot2::theme_sub_plot(
-    margin = ggplot2::margin(20, 42, 8, 42),
+    margin = ggplot2::margin(16, 42, 8, 42),
     caption.position = "plot",
     caption = ggtext::element_textbox(
       size = 8,
@@ -187,7 +186,6 @@ plot <-
         title.position = "top",
       ),
       override.aes = list(
-        size = c(2.687, 7.602, 12.607, 17),
         alpha = 0.2,
         color = palettes$color_sub
       )
