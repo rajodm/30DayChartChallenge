@@ -22,6 +22,12 @@ source("theme_30dcc.R")
 
 data <- readr::read_csv(here::here("data26/malariaAtlas/pf_pv_pr.csv"))
 
+# Download PrPR for Asia
+# pv <- malariaAtlas::getPR(
+#   continent = "Asia",
+#   species = "Pv"
+# )
+
 pv <- data |>
   dplyr::filter(continent_id == "Asia", species == "P. vivax")
 
